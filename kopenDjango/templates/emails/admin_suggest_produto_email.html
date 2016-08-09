@@ -1,0 +1,9 @@
+Prezado {{ receiver }},<br/>
+<br/>
+Produto sugerido para o site {{ site_name }}<br/>
+<br/>
+Link da produto "{{ produto }}":<br/>
+<br/>
+<a href="{{ protocol }}{{ domain }}/admin/produto/produto/{{ produto.id }}/">{{ protocol }}{{ domain }}/admin/produto/produto/{{ produto.id }}/</a><br/>
+<br/>
+{% include "emails/signature.html" %}

@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load tags_produtos %}
+{% load static from staticfiles %}
+
+{% block site_title %}
+{% if oferta %}
+<title>{{ oferta.produto.nome }} - {{ site_name }} - Compare Preços Aqui</title>
+{% else %}
+<title>{{ site_name }} - Compare Preços Aqui</title>
+{% endif %}
+{% endblock %}
+{% block open_graph %}
+{% if oferta %}
+<meta property="og:title" content="{{ oferta.produto.nome }} - {{ site_name }} - Compare Preços Aqui" />
+<meta property="og:type" content="website" />
+<meta property="og:image" content="{{ protocol }}{{ domain }}{{ oferta.get_imagem_url }}" />
+<meta property="og:image:width" content="{{ oferta.get_imagem_width }}" />
+<meta property="og:image:height" content="{{ oferta.get_imagem_height }}" />
+<meta property="og:site_name" content="{{ oferta.produto.nome }} - {{ site_name }} - Compare Preços Aqui" />
+<meta property="og:url" content="{{ protocol }}{{ domain }}/oferta/?id={{ oferta.id }}" />
+{% else %}
+<meta property="og:title" content="{{ site_name }} - Compare Preços Aqui" />
+<meta property="og:type" content="website" />
+<meta property="og:image" content="{{ protocol }}{{ domain }}{% static "icon_250px.png" %}" />
+<meta property="og:image:width" content="250" />
+<meta property="og:image:height" content="250" />
+<meta property="og:site_name" content="{{ site_name }} - Compare Preços Aqui" />
+<meta property="og:url" content="{{ protocol }}{{ domain }}" />
+{% endif %}
+{% endblock %}
+{% block body_content %}
+<!-- Dialog Oferta -->
+<div id="id_dialog_oferta" data-role="dialog" data-close-btn="none" data-overlay-theme="a" style="text-align: center;">
+	<div data-role="header" data-theme="c"><h1>Oferta</h1></div>
+	<!-- Container para conteudo -->
+	<div data-role="content" data-theme="c">
+		{% if oferta %}
+		{% include "ajax_oferta.html" %}		  
+		{% else %}
+		<div class="ui-grid-solo">
+			<div class="ui-block-a"><p>Oferta não encontrada.</p></div>
+			<p><a id="id_botao_go_home" href="{{ protocol }}{{ domain }}" data-role="button" data-mini="true" data-inline="true" rel="external" data-ajax="false" data-theme="e">Acesse Ofertas &quot;&quot;Qui&quot;&quot;</a></p>
+		</div>
+		{% endif %}
+    </div>
+</div>
+{% endblock %}

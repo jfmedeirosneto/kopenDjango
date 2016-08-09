@@ -1,0 +1,20 @@
+{% load tags_produtos %}
+<li>
+	{% with w1=120 h1=100 w2=destaque.get_imagem_width h2=destaque.get_imagem_height %}	
+	{% if destaque %}
+	<a href="{{ protocol }}{{ domain }}/oferta/?id={{ destaque.id }}" style="height: {{ h1|add:"50" }}px;" id="id_link_destaque_{{ destaque.id }}" title="Clique para mais detalhes da oferta: &quot;{{ destaque }} / {{ destaque.cidade }}&quot;">
+		<div style="width: {{ w1 }}px; padding-bottom: 3px; margin-left: auto; margin-right: auto;">
+			{{ destaque.preco|format_currency }}
+		</div>
+		<div style="width: {{ w1 }}px; height: {{ h1|sub:"10" }}px; margin-left: auto; margin-right: auto; overflow: hidden; position: relative;">
+			<img src="{{ protocol }}{{ domain }}{{ destaque.get_imagem_url }}" style="position: absolute; left: {{ w2|sub:w1|div:"-2" }}px; top: {{ h2|sub:h1|add:"10"|div:"-2" }}px; width: {{ w2 }}px; height: {{ h2 }}px;"/>
+		</div>
+		<div style="width: {{ w1 }}px; padding-top: 3px; margin-left: auto; margin-right: auto;">
+			{{ destaque.produto.nome }}
+		</div>
+	</a>
+	{% else %}
+	<div class="ui-btn ui-btn-inline ui-btn-up-c" style="height: {{ h1|add:"50" }}px;"></div>
+	{% endif %}
+	{% endwith %}	
+</li>

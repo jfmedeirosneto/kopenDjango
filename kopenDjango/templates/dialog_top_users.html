@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load static from staticfiles %}
+{% load humanize %}
+{% block body_content %}
+<!-- Dialog Top Users -->
+<div id="id_dialog_top_users" data-role="dialog" data-close-btn="right" data-overlay-theme="a" style="text-align: center;">
+    <div data-role="header" data-theme="c"><h1>Top Usuários</h1></div>            
+    <div data-role="content" data-theme="c">
+		<ul data-role="listview" data-inset="true">
+    		{% for user in top_users %}
+    		<li style="text-align: center;">{{ user.user }}<br/>{{ user.points|intcomma }} pontos</li>
+    		{% endfor %}
+		</ul>
+    </div>
+</div>
+{% endblock %}

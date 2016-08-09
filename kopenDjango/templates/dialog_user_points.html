@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load static from staticfiles %}
+{% load humanize %}
+{% block body_content %}
+<!-- Dialog User Points -->
+<div id="id_dialog_user_points" data-role="dialog" data-close-btn="right" data-overlay-theme="a" style="text-align: center;">
+    <div data-role="header" data-theme="c"><h1>Sua Pontuação</h1></div>            
+    <div data-role="content" data-theme="c">
+		{% if kopen_user %}
+		<h3>{{ kopen_user.points|intcomma }} pontos</h3>
+		{% else %}
+		<h3>Para acessar seus pontos você precisa entrar!</h3>
+		{% endif %}
+    </div>
+</div>
+{% endblock %}

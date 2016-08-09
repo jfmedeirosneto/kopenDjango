@@ -1,0 +1,169 @@
+[
+ {"pk": 1,
+  "model": "sites.site",
+  "fields": {
+  	"domain": "127.0.0.1:8000",
+  	"name": "127.0.0.1:8000"
+  	}
+ },
+ {"pk": 1,
+  "model": "auth.user",
+  "fields": {
+  	"username": "admin",
+  	"first_name": "Admin",
+  	"last_name": "kopenDjango",  	
+  	"is_active": true,
+  	"is_superuser": true,
+  	"is_staff": true,
+  	"last_login": "2013-01-01T00:00:00+03:00",
+  	"groups": [],
+  	"user_permissions": [],
+  	"password": "sha1$98a16$4a11c86baf54f7e2bf744080dee1d3ee3444dc1c",
+  	"email": "admin@admin.com",
+  	"date_joined": "2013-01-01T00:00:00+03:00"
+  	}
+ },
+ {"pk": 1,
+  "model": "cidade.Cidade",
+  "fields": {
+  	"nome": "Jaragu\u00e1 do Sul",  	
+  	"active": true
+  	}
+ },
+ {"pk": 2,
+  "model": "cidade.Cidade",
+  "fields": {
+  	"nome": "Guaramirim",  	
+  	"active": true
+  	}
+ },
+ {"pk": 1,
+  "model": "usuario.Usuario",
+  "fields": {
+  	"user": "admin",
+  	"name": "Admin ofertasQui",
+  	"email": "admin@admin.com",
+  	"password": "admin"
+  	}
+ }, 
+ {"pk": 1,
+  "model": "produto.Produto",
+  "fields": {
+  	"nome": "Gasolina Comun"  	
+  	}
+ },
+ {"pk": 2,
+  "model": "produto.Produto",
+  "fields": {
+  	"nome": "Gasolina Aditivada"  	
+  	}
+ },
+ {"pk": 3,
+  "model": "produto.Produto",
+  "fields": {
+  	"nome": "Etanol"  	
+  	}
+ },
+ {"pk": 4,
+  "model": "produto.Produto",
+  "fields": {
+  	"nome": "Pizza Pequena"  	
+  	}
+ },
+ {"pk": 5,
+  "model": "produto.Produto",
+  "fields": {
+  	"nome": "Pizza M\u00e9dia"  	
+  	}
+ },
+ {"pk": 6,
+  "model": "produto.Produto",
+  "fields": {
+  	"nome": "Pizza Grande"	
+  	}
+ },
+ {"pk": 7,
+  "model": "produto.Produto",
+  "fields": {
+  	"nome": "Fil\u00e9 Simples"	
+  	}
+ },
+ {"pk": 8,
+  "model": "produto.Produto",
+  "fields": {
+  	"nome": "Fil\u00e9 Duplo"	
+  	}
+ },
+ {"pk": 9,
+  "model": "produto.Produto",
+  "fields": {
+  	"nome": "Alcatra"	
+  	}
+ },
+ {"pk": 10,
+  "model": "produto.Produto",
+  "fields": {
+  	"nome": "Picanha"	
+  	}
+ },
+ {"pk": 11,
+  "model": "produto.Produto",
+  "fields": {
+  	"nome": "Costela Bovina"	
+  	}
+ },
+ {"pk": 12,
+  "model": "produto.Produto",
+  "fields": {
+  	"nome": "Contra Fil\u00e9"	
+  	}
+ },
+ {"pk": 13,
+  "model": "produto.Produto",
+  "fields": {
+  	"nome": "Maminha"  	
+  	}
+ },
+ {"pk": 14,
+  "model": "produto.Produto",
+  "fields": {
+  	"nome": "Leite Integral"  	
+  	}
+ },
+ {"pk": 15,
+  "model": "produto.Produto",
+  "fields": {
+  	"nome": "Leite Desnatado"  	
+  	}
+ },
+ {"pk": 16,
+  "model": "produto.Produto",
+  "fields": {
+  	"nome": "Leite Semi-Desnatado"  	
+  	}
+ },
+ {"pk": 17,
+  "model": "produto.Produto",
+  "fields": {
+  	"nome": "Leite Baixa Lactose"  	
+  	}
+ },
+ {"pk": 18,
+  "model": "produto.Produto",
+  "fields": {
+  	"nome": "P\u00e3o Franc\u00eas"  	
+  	}
+ },
+ {"pk": 19,
+  "model": "produto.Produto",
+  "fields": {
+  	"nome": "P\u00e3o Fatiado"  	
+  	}
+ },
+ {"pk": 20,
+  "model": "produto.Produto",
+  "fields": {
+  	"nome": "P\u00e3o Caseiro"  	
+  	}
+ } 
+]

@@ -1,0 +1,12 @@
+http://code.google.com/p/django-evolution/
+
+Using Django Evolution in your project
+   1. Add django_evolution to the INSTALLED_APPS for your project
+   2. Run ./manage.py syncdb
+   3. Make modifications to the model files in your project
+   4. Run ./manage.py evolve --hint --execute
+   
+Dump and Load Data
+   1. python manage.py dumpdata > initial_data.json
+   2. With an external tool, drop any affected tables, or kill the whole db
+   3. python manage.py loaddata initial_data.json

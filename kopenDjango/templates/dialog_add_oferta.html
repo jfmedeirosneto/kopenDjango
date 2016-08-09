@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% load static from staticfiles %}
+
+{% block body_content %}
+<!-- Dialog Adiciona Oferta -->
+<div id="id_dialog_add_oferta" data-role="dialog" data-close-btn="right" data-overlay-theme="a" style="text-align: center;">
+    <div data-role="header" data-theme="c"><h1>Adicionar Oferta</h1></div>            
+    <div data-role="content" data-theme="c" style="overflow: visible;">
+	{% if kopen_user %}
+    	<div id="id_form_error5" class="form_error"></div>
+    	<form id="id_form_add_oferta" action="{{ protocol }}{{ domain }}/add_oferta/" method="post">
+    		{% csrf_token %}
+    		<div style="display: none;"><input name="user_id" value="{{ kopen_user.id }}" type="hidden" /></div>
+    		<label for="id_cidade2">Cidade</label>
+            <select name="cidade" id="id_cidade2" required="required" data-native-menu="false" data-mini="true">
+            	<option value="-1" data-placeholder="true">Selecione uma Cidade</option>
+        		{% for c in cidades %}{% if c.active %}{% if forloop.counter == 1 %}
+        		<option value="{{ c.id }}" selected="selected">{{ c.nome }}</option>
+				{% else %}
+        		<option value="{{ c.id }}">Oferta para {{ c.nome }}</option>
+				{% endif %}{% endif %}{% endfor %}
+            </select>
+            <label for="id_produto">Produto</label>            
+            <div style="position: relative;">
+                <div class="suggestionsBox" id="id_busca_produtos_add" style="display: none;">
+                    <ul class="suggestionList" id="id_busca_produtos_add_list"></ul>
+                    <img width="10" height="10" src="{{ protocol }}{{ domain }}{% static "downarrow.png" %}"/>                    
+                </div>
+            </div>
+			<input name="produto" id="id_produto" ajax_produtos="{{ protocol }}{{ domain }}/ajax_produtos/" ajax_check_produto="{{ protocol }}{{ domain }}/ajax_check_produto/" placeholder="Produto para adicionar oferta (Ex. Gasolina)" value="" type="search" required="required" autocomplete="off" data-mini="true"/>
+            <label for="id_local">Local</label>			
+            <div style="position: relative;">
+                <div class="suggestionsBox" id="id_busca_locais_add" style="display: none;">
+                    <ul class="suggestionList" id="id_busca_locais_add_list"></ul>
+                    <img width="10" height="10" src="{{ protocol }}{{ domain }}{% static "downarrow.png" %}"/>                    
+                </div>
+            </div>
+            <input name="local" id="id_local" ajax_locais="{{ protocol }}{{ domain }}/ajax_locais/" ajax_check_local="{{ protocol }}{{ domain }}/ajax_check_local/" placeholder="Local da oferta (Ex. Posto 7)" value="" type="search" required="required" autocomplete="off" data-mini="true"/>
+            <label for="id_preco">Preço R$</label>
+            <input name="preco" id="id_preco" onkeypress="return isNumberKey(event);" placeholder="Preço Ofertado (Ex. 2,759)" value="" type="text" required="required" autocomplete="off" data-mini="true"/>                    
+            <input name="submit" value="Adicionar Oferta" type="submit" data-theme="b" data-mini="true"/>
+		</form>			
+	{% else %}
+		<h3>Para adicionar uma Oferta você precisa entrar!</h3>
+		<a href="{{ protocol }}{{ domain }}/dialog_login/" rel="nofollow" data-rel="dialog" data-role="button" data-inline="true" data-mini="true" data-theme="b">Entrar</a>
+		<a href="{{ protocol }}{{ domain }}/dialog_register_user/" rel="nofollow" data-rel="dialog" data-role="button" data-inline="true" data-mini="true" data-theme="b">Novo por aqui? Registre-se</a>
+	{% endif %}            	
+    </div>
+</div>
+{% endblock %}

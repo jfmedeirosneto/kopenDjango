@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load static from staticfiles %}
+{% block body_content %}
+<!-- Dialog Login -->
+<div id="id_dialog_login" data-role="dialog" data-close-btn="right" data-overlay-theme="a" style="text-align: center;">
+    <div data-role="header" data-theme="c"><h1>Entrar</h1></div>            
+    <div data-role="content" data-theme="c">
+    	<div id="id_form_error1" class="form_error"></div>
+    	<form id="id_form_login" action="{{ protocol }}{{ domain }}/login/" method="post">
+    		{% csrf_token %}
+            <label for="id_user1">Usuário</label>
+            <input name="user" id="id_user1" placeholder="Nome de usuário" value="" type="text" required="required" autocomplete="off" data-mini="true"/>
+            <label for="id_password1">Senha</label>
+            <input name="password" id="id_password1" placeholder="" value="" type="password" required="required" autocomplete="off" data-mini="true"/>
+            <input name="submit" value="Entrar" type="submit" data-theme="b" data-mini="true"/>
+		</form>
+		<div class="ui-grid-solo" id="id_facebook_login_div">
+			<div class="ui-block-a">
+				<div style="text-align:center">
+				    <hr style="display:inline-block; position:relative; top:4px; width:50px;" />&nbsp;&nbsp;OU&nbsp;&nbsp;<hr style="display:inline-block; position:relative; top:4px; width:50px;" />
+				</div>
+			</div>
+			<div class="ui-block-a">
+				<a href="https://graph.facebook.com/oauth/authorize?redirect_uri={{ protocol }}{{ domain }}/facebook_authorize/&client_id={{ facebook_client_id }}&scope=email,user_likes&state=login" rel="nofollow" title="Entrar pelo Facebook" id="id_facebook_login">
+					<img width="180" height="38" alt="Entrar pelo Facebook" src="{{ protocol }}{{ domain }}{% static "facebook_login.jpg" %}"/>
+				</a>
+			</div>
+		</div>
+    </div>
+</div>
+{% endblock %}

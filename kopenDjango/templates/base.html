@@ -1,0 +1,68 @@
+{% load static from staticfiles %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+        <meta name="HandheldFriendly" content="True" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <!-- Site Title -->
+        {% block site_title %}
+        <title>{{ site_name }} - Compare Preços Aqui</title>
+        {% endblock %}
+        <!-- Open Graph Metatags -->
+        {% block open_graph %}
+		<meta property="og:title" content="{{ site_name }} - Compare Preços Aqui" />
+		<meta property="og:type" content="website" />
+		<meta property="og:image" content="{{ protocol }}{{ domain }}{% static "icon_250px.png" %}" />
+        <meta property="og:image:width" content="250" />
+        <meta property="og:image:height" content="250" />		
+		<meta property="og:site_name" content="{{ site_name }} - Compare Preços Aqui" />
+		<meta property="og:url" content="{{ protocol }}{{ domain }}" />
+		{% endblock %}
+		<!-- kopenDjango Metatags -->
+		<meta property="kopen:home" content="{{ protocol }}{{ domain }}" />
+		<!-- favicon -->
+		<link rel="shortcut icon" href="{{ protocol }}{{ domain }}{% static "favicon.ico" %}">
+		<link rel="icon" type="image/gif" href="{{ protocol }}{{ domain }}{% static "favicon.gif" %}">		        
+        <!-- css -->
+		<link rel="stylesheet" href="{{ protocol }}{{ domain }}{% static "jquery.mobile-1.3.1.custom.css" %}" />
+        <link rel="stylesheet" href="{{ protocol }}{{ domain }}{% static "kopenDjango.css" %}" />
+        <!-- noscript -->
+		<noscript>
+			<meta http-equiv="refresh" content="0;url={{ protocol }}{{ domain }}/noscript/">
+		</noscript>        
+        <!-- scripts -->		
+		<script type="text/javascript" src="{{ protocol }}{{ domain }}{% static "jquery-1.9.1.min.js" %}"></script>
+		<script type="text/javascript" src="{{ protocol }}{{ domain }}{% static "kopenDjango.js" %}"></script>
+		<script type="text/javascript" src="{{ protocol }}{{ domain }}{% static "jquery.mobile-1.3.1.min.js" %}"></script>
+		<script type="text/javascript" src="{{ protocol }}{{ domain }}{% static "badger.min.js" %}"></script>
+		<script type="text/javascript">
+			//Recarrega statics
+			function reloadStatic() {
+				if( window.webView ) {
+					window.webView.clearCache();
+				}
+				window.location.reload(true);
+				console.log("reload...");
+			}
+			//Verifica versao dos statics no cache do navegador/webview
+			var actualVersion = 100;
+			if (getStaticVersion && typeof(getStaticVersion) === 'function') {
+				var staticVersion = getStaticVersion();
+				if( staticVersion !== actualVersion ) {
+					reloadStatic();
+				}
+			} else {
+				reloadStatic();
+			}
+		</script>
+    </head>
+    <body>
+    	{% block body_content %}{% endblock %}
+        <!-- Extra scripts -->
+        <script type="text/javascript">
+        var _gaq=_gaq||[];_gaq.push(["_setAccount","UA-42104997-1"]);_gaq.push(["_trackPageview"]);(function(){var b=document.createElement("script");b.type="text/javascript";b.async=true;b.src=("https:"==document.location.protocol?"https://ssl":"http://www")+".google-analytics.com/ga.js";var a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(b,a)})();        
+        </script>        
+    </body>
+</html>

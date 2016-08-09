@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block body_content %}
+<!-- Dialog Show Info -->
+<div id="id_dialog_show_info" data-role="dialog" data-close-btn="right" data-overlay-theme="a" style="text-align: center;">
+    <div data-role="header" data-theme="c"><h1>{{ site_name }}</h1></div>            
+    <div id="id_dialog_show_info_content" data-role="content" data-theme="c">
+        <p>{{ info }}</p>
+        <a id="id_botao_go_home" href="{{ protocol }}{{ domain }}" data-role="button" data-mini="true" data-inline="true" rel="external" data-ajax="false" data-theme="e" title="Acessar Ofertas &quot;&quot;Qui&quot;&quot;">Acessar Ofertas &quot;&quot;Qui&quot;&quot;</a>        
+    </div>
+</div>
+{% endblock %}

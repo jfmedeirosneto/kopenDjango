@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block body_content %}
+<!-- Dialog Contact Form -->
+<div id="id_dialog_contact_form" data-role="dialog" data-close-btn="right" data-overlay-theme="a" style="text-align: center;">
+    <div data-role="header" data-theme="c"><h1>Fale Conosco</h1></div>            
+    <div data-role="content" data-theme="c">
+    	<div id="id_form_error10" class="form_error"></div>
+    	<form id="id_form_contact_form" action="{{ protocol }}{{ domain }}/contact_form/" method="post">
+    		{% csrf_token %}
+    		{% if kopen_user %}
+            <label for="id_nome">Nome</label>
+            <input name="nome" id="id_nome" placeholder="Nome" value="{{ kopen_user.name }}" type="text" required="required" autocomplete="off" data-mini="true"/>
+            <label for="id_email">E-mail</label>
+            <input name="email" id="id_email" placeholder="E-mail" value="{{ kopen_user.email }}" type="email" required="required" autocomplete="off" data-mini="true"/>
+            {% else %}
+            <label for="id_nome">Nome</label>
+            <input name="nome" id="id_nome" placeholder="Nome" value="" type="text" required="required" autocomplete="off" data-mini="true"/>
+            <label for="id_email">E-mail</label>
+            <input name="email" id="id_email" placeholder="E-mail" value="" type="email" required="required" autocomplete="off" data-mini="true"/>            
+            {% endif %}
+            <label for="id_mensagem">Mensagem</label>
+            <textarea name="mensagem" id="id_mensagem" rows="10" placeholder="Mensagem" required="required"></textarea>
+            <input name="submit" value="Enviar" type="submit" data-theme="b" data-mini="true"/>
+		</form>
+    </div>
+</div>
+{% endblock %}

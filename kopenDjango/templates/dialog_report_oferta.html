@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load tags_produtos %}
+{% block body_content %}
+<!-- Dialog Report Oferta -->
+<div id="id_dialog_report_oferta" data-role="dialog" data-close-btn="right" data-overlay-theme="a" style="text-align: center;">
+    <div data-role="header" data-theme="c"><h1>Erro</h1></div>            
+    <div data-role="content" data-theme="c">
+    	{% if oferta %}
+		{% if kopen_user %}
+		<div id="id_form_error7" class="form_error"></div>
+		<div class="ui-grid-solo">
+			<div class="ui-block-a">
+				<p>
+					{{ oferta.preco|format_currency }} - {{ oferta.produto.nome }}<br/>
+					{{ oferta.local }} / {{ oferta.cidade }}
+					{% if oferta.promoted %}
+					<br/>* Oferta de Anunciante
+					{% endif %}
+					{% if oferta.new %}
+					<br/>* Oferta nova
+					{% endif %}			
+				</p>
+				{% for choice in choices %} 
+				<p>
+					<a id="id_botao_report_erro{{ choice.0 }}" href="{{ protocol }}{{ domain }}/report_oferta/?oferta_id={{ oferta.id }}&user_id={{ kopen_user.id }}&erro={{ choice.0 }}&csrfmiddlewaretoken={{ csrf_token }}" rel="nofollow" cookie="__ReportouErroOferta__{{ oferta.id }}" data-role="button" data-mini="true">{{ choice.1 }}</a>
+				</p>
+				{% endfor %}
+			</div>
+		</div>
+		{% else %}
+		<h3>Para informar erro você precisa entrar!</h3>
+		<a href="{{ protocol }}{{ domain }}/dialog_login/" rel="nofollow" data-rel="dialog" data-role="button" data-inline="true" data-mini="true" data-theme="b">Entrar</a>
+		<a href="{{ protocol }}{{ domain }}/dialog_register_user/" rel="nofollow" data-rel="dialog" data-role="button" data-inline="true" data-mini="true" data-theme="b">Novo por aqui? Registre-se</a>
+		{% endif %}            			
+		{% else %}
+		<div class="ui-grid-solo">
+			<div class="ui-block-a"><p>Oferta não encontrada.</p></div>
+		</div>		
+		{% endif %}
+    </div>
+</div>
+{% endblock %}

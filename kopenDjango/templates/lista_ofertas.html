@@ -1,0 +1,39 @@
+{% load tags_produtos %}
+<ul id="id_ofertas_listview" data-role="listview" data-inset="true" data-theme="c">
+    <li data-icon="false">
+        <div class="ui-grid-b" style="width: 200px; margin: auto;">
+            <div class="ui-block-b" style="text-align: right;">
+                <a style="width: 40px; padding-left: 15px;" id="id_botao_facebook" target="_blank" href="http://www.facebook.com/sharer.php?u={{ protocol }}{{ domain }}/?busca={{ busca|urlify }}" rel="nofollow" callback="{{ protocol }}{{ domain }}/busca_shared/?busca={{ busca|urlify }}&csrfmiddlewaretoken={{ csrf_token }}" data-role="button" data-icon="facebook" data-iconpos="notext" data-inline="true" data-mini="true" title="Compartilhar Busca no Facebook"></a>
+            </div>
+            <div class="ui-block-c" style="text-align: left;">
+                <a style="width: 40px; padding-left: 15px;" id="id_botao_twitter" target="_blank" href="http://twitter.com/home?status=Gostei das ofertas &quot;{{ busca }}&quot; - {{ protocol }}{{ domain }}/?busca={{ busca|urlify }}" rel="nofollow" callback="{{ protocol }}{{ domain }}/busca_shared/?busca={{ busca|urlify }}&csrfmiddlewaretoken={{ csrf_token }}" data-role="button" data-icon="twitter" data-iconpos="notext" data-inline="true" data-mini="true" title="Compartilhar Busca no Twitter"></a>
+            </div>
+            <div class="ui-block-d" style="text-align: left;">
+                <a style="width: 40px; padding-left: 15px;" id="id_botao_google_plus" target="_blank" href="https://plus.google.com/share?url={{ protocol }}{{ domain }}/?busca={{ busca|urlify }}" rel="nofollow" callback="{{ protocol }}{{ domain }}/busca_shared/?busca={{ busca|urlify }}&csrfmiddlewaretoken={{ csrf_token }}" data-role="button" data-icon="google_plus" data-iconpos="notext" data-inline="true" data-mini="true" title="Compartilhar Busca no Google+"></a>
+            </div>  
+        </div>        
+    </li>
+    {% for oferta in data %}
+	<li data-icon="plus">
+		{% if forloop.first and forloop.last %}
+		<a href="{{ protocol }}{{ domain }}/oferta/?id={{ oferta.id }}" id="id_link_oferta_{{ oferta.id }}" title="Clique para mais detalhes da oferta: &quot;{{ oferta }} / {{ oferta.cidade }}&quot;">
+		{% else %}{% if forloop.first %}
+		<a href="{{ protocol }}{{ domain }}/oferta/?id={{ oferta.id }}&next_id={{ data|next_id:forloop.counter0 }}" id="id_link_oferta_{{ oferta.id }}" title="Clique para mais detalhes da oferta: &quot;{{ oferta }} / {{ oferta.cidade }}&quot;">
+		{% else %}{% if forloop.last %}
+		<a href="{{ protocol }}{{ domain }}/oferta/?id={{ oferta.id }}&previous_id={{ data|previus_id:forloop.counter0 }}" id="id_link_oferta_{{ oferta.id }}" title="Clique para mais detalhes da oferta: &quot;{{ oferta }} / {{ oferta.cidade }}&quot;">
+		{% else %}
+		<a href="{{ protocol }}{{ domain }}/oferta/?id={{ oferta.id }}&previous_id={{ data|previus_id:forloop.counter0 }}&next_id={{ data|next_id:forloop.counter0 }}" id="id_link_oferta_{{ oferta.id }}" title="Clique para mais detalhes da oferta: &quot;{{ oferta }} / {{ oferta.cidade }}&quot;">
+		{% endif %}{% endif %}{% endif %}
+			<div class="ui-grid-a">
+			    <div class="ui-block-a" style="width: 60px; padding-top: 5px; padding-left: 5px;">
+			    	<img width="{{ oferta.get_thumb_imagem_width }}" height="{{ oferta.get_thumb_imagem_height }}" alt="{{ oferta.produto.nome }}" src="{{ protocol }}{{ domain }}{{ oferta.get_thumb_imagem_url }}"/>
+			    </div>
+			    <div class="ui-block-b">
+					<h3>{{ oferta.preco|format_currency }}</h3>
+					<p style="min-width: 250px;">{{ oferta.produto.nome }}<br/>{{ oferta.local }}{% if oferta.promoted %}<br/>* Oferta de Anunciante{% endif %}</p>			    	
+			    </div>
+			</div>
+		</a>
+	</li>
+    {% endfor %}
+</ul>

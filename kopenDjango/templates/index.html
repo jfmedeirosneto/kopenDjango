@@ -1,0 +1,151 @@
+{% extends "base.html" %}
+{% load tags_produtos %}
+{% load static from staticfiles %}
+
+{% block site_title %}
+{% if busca %}
+<title>Ofertas {{ busca }} - {{ site_name }} - Compare Preços Aqui</title>
+{% else %}
+<title>{{ site_name }} - Compare Preços Aqui</title>
+{% endif %}
+{% endblock %}
+{% block open_graph %}
+{% if busca %}
+<meta property="og:title" content="Ofertas {{ busca }} - {{ site_name }} - Compare Preços Aqui" />
+<meta property="og:type" content="website" />
+<meta property="og:image" content="{{ protocol }}{{ domain }}{% static "icon_250px.png" %}" />
+<meta property="og:image:width" content="250" />
+<meta property="og:image:height" content="250" />
+<meta property="og:site_name" content="Ofertas {{ busca }} - {{ site_name }} - Compare Preços Aqui" />
+<meta property="og:url" content="{{ protocol }}{{ domain }}/?busca={{ busca|urlify }}" />
+{% else %}
+<meta property="og:title" content="{{ site_name }} - Compare Preços Aqui" />
+<meta property="og:type" content="website" />
+<meta property="og:image" content="{{ protocol }}{{ domain }}{% static "icon_250px.png" %}" />
+<meta property="og:image:width" content="250" />
+<meta property="og:image:height" content="250" />
+<meta property="og:site_name" content="{{ site_name }} - Compare Preços Aqui" />
+<meta property="og:url" content="{{ protocol }}{{ domain }}" />
+{% endif %}
+{% endblock %}
+{% block body_content %}
+<!-- Pagina Home -->
+<div data-role="page" id="home" data-title="{{ site_name }} - Compare Preços Aqui" style="text-align: center;">
+	<!-- Panel Menu -->
+	<div data-role="panel" id="id_panel_menu" data-animate="false" data-display="overlay">
+		<ul data-role="listview" id="id_listview_menu" data-theme="b" data-icon="false">
+            <li data-icon="delete" data-theme="c"><a id="id_close_menu" href="#id_home_header" data-rel="close">Fechar</a></li>
+            {% if kopen_user %}
+            <li data-theme="c">Bem vindo, {{ kopen_user.name }}</li>                
+            <li data-mini="true"><a href="{{ protocol }}{{ domain }}/dialog_add_oferta/" rel="nofollow" data-rel="dialog" data-mini="true">Adicionar uma Oferta</a></li>
+            <li data-mini="true"><a href="{{ protocol }}{{ domain }}/dialog_change_user/" rel="nofollow" data-rel="dialog" data-mini="true">Altere seus dados</a></li>
+            <li data-mini="true"><a href="{{ protocol }}{{ domain }}/dialog_user_points/" rel="nofollow" data-rel="dialog" data-mini="true">Sua Pontuação</a></li>
+            <li data-mini="true"><a href="{{ protocol }}{{ domain }}/dialog_contact_form/" rel="nofollow" data-rel="dialog" data-mini="true">Fale Conosco</a></li>
+            <li data-mini="true"><a href="{{ protocol }}{{ domain }}/dialog_termos_uso/" rel="nofollow" data-rel="dialog" data-mini="true">Termos de Uso</a></li>
+            <li data-mini="true"><a href="{{ protocol }}{{ domain }}/dialog_top_users/" rel="nofollow" data-rel="dialog" data-mini="true">Top Usuários</a></li>
+            <li data-mini="true"><a id="id_button_logout" href="{{ protocol }}{{ domain }}/logout/?csrfmiddlewaretoken={{ csrf_token }}" rel="nofollow" data-mini="true">Sair</a></li>                  
+            {% else %}
+            <li data-theme="c">Bem vindo, Visitante</li>
+            <li data-mini="true"><a href="{{ protocol }}{{ domain }}/dialog_login/" rel="nofollow" data-rel="dialog" data-mini="true">Entrar</a></li>
+            <li data-mini="true"><a href="{{ protocol }}{{ domain }}/dialog_register_user/" rel="nofollow" data-rel="dialog" data-mini="true">Novo por aqui? Registre-se</a></li>
+            <li data-mini="true"><a href="{{ protocol }}{{ domain }}/dialog_request_password/" rel="nofollow" data-rel="dialog" data-mini="true">Esqueceu sua senha?</a></li>
+            <li data-mini="true"><a href="{{ protocol }}{{ domain }}/dialog_add_oferta/" rel="nofollow" data-rel="dialog" data-mini="true">Adicionar uma Oferta</a></li>
+            <li data-mini="true"><a href="{{ protocol }}{{ domain }}/dialog_contact_form/" rel="nofollow" data-rel="dialog" data-mini="true">Fale Conosco</a></li>
+            <li data-mini="true"><a href="{{ protocol }}{{ domain }}/dialog_top_users/" rel="nofollow" data-rel="dialog" data-mini="true">Top Usuários</a></li>
+            <li data-mini="true"><a href="{{ protocol }}{{ domain }}/dialog_termos_uso/" rel="nofollow" data-rel="dialog" data-mini="true">Termos de Uso</a></li>
+            {% endif %}		    
+		</ul>			
+	</div>
+	<!-- Header -->	
+	<div id="id_home_header" data-theme="c" data-role="header">
+		<a href="#id_panel_menu" rel="nofollow" id="id_botao_menu" data-icon="bars" title="Menu" class="ui-btn-left" data-theme="c">Menu</a>		
+		<img width="122" height="30" id="id_image_header" alt="{{ site_name }} - Compare Preços Aqui" src="{{ protocol }}{{ domain }}{% static 'logo_30px.png' %}"/>
+	</div>
+	<!-- Content -->
+    <div data-role="content" style="padding: 5px;">
+        <a href="{{ protocol }}{{ domain }}/dialog_add_oferta/" rel="nofollow" data-rel="dialog" data-role="button" data-mini="true" data-inline="true" data-theme="e">Adicione uma nova Oferta</a>
+		<div id="id_group_busca">
+            <div id="id_form_error_busca" class="form_error"></div>
+            <form id="id_form_busca" action="{{ protocol }}{{ domain }}/busca/" method="post">
+				{% csrf_token %}		
+	            <div style="position: relative;">
+                    <div class="suggestionsBox" id="id_busca_produtos" style="display: none;">
+                        <ul class="suggestionList" id="id_busca_produtos_list"></ul>
+                        <img width="10" height="10" src="{{ protocol }}{{ domain }}{% static "downarrow.png" %}"/>                    
+                    </div>
+                </div>
+                <input name="busca" id="id_busca" ajax_produtos="{{ protocol }}{{ domain }}/ajax_produtos/" placeholder="Produto que você procura" value="{{ busca }}" type="search" required="required" autocomplete="off"/>
+	            <select name="cidade" id="id_cidade1" required="required" data-native-menu="false" data-mini="true">
+	            	<option value="-1" data-placeholder="true">Selecione Cidade</option>
+	        		{% for c in cidades %}{% if c.active %}{% if forloop.counter == 1 %}
+	        		<option value="{{ c.id }}" selected="selected">Ofertas para {{ c.nome }}</option>
+					{% else %}
+	        		<option value="{{ c.id }}">Ofertas para {{ c.nome }}</option>
+					{% endif %}{% endif %}{% endfor %}
+	            </select>                                	            
+	            <input name="submit" value="Procurar Ofertas &quot;&quot;Qui&quot;&quot;" type="submit" data-theme="b" data-inline="true" data-mini="true"/>
+				<div id="id_group_ordenar" style="display: none;">
+					<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+						<label for="id_ordenar_a">Popular</label>
+						<input name="ordenar" id="id_ordenar_a" value="popularidade" type="radio" checked="checked" data-mini="true" autocomplete="off"/>
+						<label for="id_ordenar_b">Nova</label>
+						<input name="ordenar" id="id_ordenar_b" value="data" type="radio" data-mini="true" autocomplete="off"/>
+						<label for="id_ordenar_c">Vistas</label>
+						<input name="ordenar" id="id_ordenar_c" value="visualizacoes" type="radio" data-mini="true" autocomplete="off"/>
+						<label for="id_ordenar_d">Preço</label>
+						<input name="ordenar" id="id_ordenar_d" value="preco_menor" type="radio" data-mini="true" autocomplete="off"/>
+					</fieldset>
+				</div>
+            </form>
+		</div>
+        <!-- Container para conteudo dinamico/inicialmente carrega destaques -->
+        <div id="id_conteudo_busca">
+		    <div data-role="navbar" style="padding-top: 10px;">
+		        <ul>
+		            <li><div class="ui-btn ui-btn-inline ui-btn-up-c" style="height:20px;">Destaques</div></li>
+		        </ul>		    	
+		        <ul>
+		            {% include "destaque_oferta.html" with destaque=destaque1 %}
+		            {% include "destaque_oferta.html" with destaque=destaque2 %}
+		        </ul>
+		        <ul>
+		            {% include "destaque_oferta.html" with destaque=destaque3 %}
+		            {% include "destaque_oferta.html" with destaque=destaque4 %}
+		        </ul>
+		        <ul>
+		            {% include "destaque_oferta.html" with destaque=destaque5 %}
+		            {% include "destaque_oferta.html" with destaque=destaque6 %}
+		        </ul>
+		        <ul>
+		            {% include "destaque_oferta.html" with destaque=destaque7 %}
+		            {% include "destaque_oferta.html" with destaque=destaque8 %}
+		        </ul>
+		        <ul>
+		            {% include "destaque_oferta.html" with destaque=destaque9 %}
+		            {% include "destaque_oferta.html" with destaque=destaque10 %}
+		        </ul>
+		    </div>
+        </div>
+    </div>
+</div>
+<!-- Dialog Info -->
+<div id="id_dialog_info" data-role="dialog" data-close-btn="right" data-overlay-theme="a" style="text-align: center;">
+    <div data-role="header" data-theme="c"><h1>{{ site_name }}</h1></div>            
+    <div id="id_dialog_info_content" data-role="content" data-theme="c">
+    </div>
+</div>
+<!-- Dialog Oferta -->
+<div id="id_dialog_ajax_oferta" ajax_oferta="{{ protocol }}{{ domain }}/ajax_oferta/" data-role="dialog" data-close-btn="right" data-overlay-theme="a" style="text-align: center;">
+	<div data-role="header" data-theme="c"><h1>Oferta</h1></div>
+	<!-- Container para conteudo dinamico -->
+	<div id="id_conteudo_oferta" data-role="content" data-theme="c">
+    </div>
+</div>
+{% if busca %}<script type="text/javascript">
+function submitFormBusca(event) {
+    $(window.document).off("pageshow", "#home", submitFormBusca);
+    window.kopenHome.find("#id_form_busca").submit();
+}
+$(window.document).on("pageshow", "#home", submitFormBusca);
+</script>{% endif %}
+{% endblock %}

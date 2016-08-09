@@ -1,0 +1,12 @@
+Prezado {{ receiver }},<br/>
+<br/>
+Novo Contato Fale Conosco {{ site_name }}<br/>
+<br/>
+Nome: {{ nome }}<br/>
+Email: {{ email }}<br/>
+<br/>
+Mensagem:<br/>
+<br/>
+{% autoescape off %}{{ mensagem }}{% endautoescape %}
+<br/>
+{% include "emails/signature.html" %}

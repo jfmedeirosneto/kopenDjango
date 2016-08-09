@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load static from staticfiles %}
+{% block body_content %}
+<!-- Dialog User -->
+<div id="id_dialog_change_user" data-role="dialog" data-close-btn="right" data-overlay-theme="a" style="text-align: center;">
+    <div data-role="header" data-theme="c"><h1>Seus Dados</h1></div>            
+    <div data-role="content" data-theme="c">
+		{% if kopen_user %}
+    	<div id="id_form_error3" class="form_error"></div>
+    	<form id="id_form_user" action="{{ protocol }}{{ domain }}/change_user/" method="post">
+    		{% csrf_token %}
+    		<div style="display: none;"><input name="id" value="{{ kopen_user.id }}" type="hidden" /></div>            		
+            <label for="id_user3">Usuário</label>
+            <input name="user" id="id_user3" placeholder="Nome de usuário" value="{{ kopen_user.user }}" type="text" required="required" autocomplete="off" data-mini="true"/>
+            <label for="id_name3">Nome completo</label>
+            <input name="name" id="id_name3" placeholder="Nome completo" value="{{ kopen_user.name }}" type="text" required="required" autocomplete="off" data-mini="true"/>
+            <label for="id_email3">E-mail</label>
+            <input name="email" id="id_email3" placeholder="E-mail" value="{{ kopen_user.email }}" type="email" required="required" autocomplete="off" data-mini="true"/>
+            <label for="id_password3">Senha</label>
+            <input name="password" id="id_password3" placeholder="" value="" type="password" autocomplete="off" data-mini="true"/>
+            <input name="submit" value="Alterar" type="submit" data-theme="b" data-mini="true"/>
+		</form>
+		<div class="ui-grid-solo" id="id_facebook_connect_div">
+			<div class="ui-block-a">
+				<div style="text-align:center">
+				    <hr style="display:inline-block; position:relative; top:4px; width:50px;" />&nbsp;&nbsp;OU&nbsp;&nbsp;<hr style="display:inline-block; position:relative; top:4px; width:50px;" />
+				</div>
+			</div>
+			<div class="ui-block-a">
+				<a href="https://graph.facebook.com/oauth/authorize?redirect_uri={{ protocol }}{{ domain }}/facebook_authorize/&client_id={{ facebook_client_id }}&scope=email,user_likes&state=connect" rel="nofollow" title="Conectar ao Facebook" id="id_facebook_connect">
+					<img width="180" height="38" alt="Conectar ao Facebook" src="{{ protocol }}{{ domain }}{% static "facebook_connect.jpg" %}"/>
+				</a>
+			</div>
+		</div>		
+		{% else %}
+		<h3>Para acessar seus dados você precisa entrar!</h3>
+		{% endif %}
+    </div>
+</div>
+{% endblock %}

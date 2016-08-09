@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load static from staticfiles %}
+{% block body_content %}
+<!-- Dialog Register -->
+<div id="id_dialog_register_user" data-role="dialog" data-close-btn="right" data-overlay-theme="a" style="text-align: center;">
+    <div data-role="header" data-theme="c"><h1>Registre-se</h1></div>            
+    <div data-role="content" data-theme="c">
+    	<div id="id_form_error2" class="form_error"></div>
+    	<form id="id_form_register" action="{{ protocol }}{{ domain }}/register/" method="post">
+    		{% csrf_token %}
+            <label for="id_user2">Usuário</label>
+            <input name="user" id="id_user2" placeholder="Nome de usuário" value="" type="text" required="required" autocomplete="off" data-mini="true"/>
+            <label for="id_name2">Nome completo</label>
+            <input name="name" id="id_name2" placeholder="Nome completo" value="" type="text" required="required" autocomplete="off" data-mini="true"/>
+            <label for="id_email2">E-mail</label>
+            <input name="email" id="id_email2" placeholder="E-mail" value="" type="email" required="required" autocomplete="off" data-mini="true"/>
+            <label for="id_password2">Senha</label>
+            <input name="password" id="id_password2" placeholder="" value="" type="password" required="required" autocomplete="off" data-mini="true"/>
+            <p><a id="id_read_license" href="{{ protocol }}{{ domain }}/dialog_termos_uso/" rel="nofollow" data-rel="dialog" >Ler Termos de Uso</a></p>
+            <p><label for="id_license2">Concordo com os Termos de Uso</label>
+            <input name="chklicense" id="id_license2" type="checkbox" required="required" disabled="disabled" data-mini="true"/></p>
+            <input name="submit" value="Registrar" type="submit" data-theme="b" data-mini="true"/>
+		</form>
+		<div class="ui-grid-solo" id="id_facebook_register_div">
+			<div class="ui-block-a">
+				<div style="text-align:center">
+				    <hr style="display:inline-block; position:relative; top:4px; width:50px;" />&nbsp;&nbsp;OU&nbsp;&nbsp;<hr style="display:inline-block; position:relative; top:4px; width:50px;" />
+				</div>
+			</div>
+			<div class="ui-block-a">
+				<a href="https://graph.facebook.com/oauth/authorize?redirect_uri={{ protocol }}{{ domain }}/facebook_authorize/&client_id={{ facebook_client_id }}&scope=email,user_likes&state=register" rel="nofollow" title="Registrar pelo Facebook" id="id_facebook_register">
+					<img width="180" height="38" alt="Registrar pelo Facebook" src="{{ protocol }}{{ domain }}{% static "facebook_register.jpg" %}"/>
+				</a>
+			</div>
+		</div>		
+    </div>
+</div>
+{% endblock %}

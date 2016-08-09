@@ -1,0 +1,9 @@
+Prezado {{ receiver }},<br/>
+<br/>
+Oferta adicionada no site {{ site_name }}<br/>
+<br/>
+Link da oferta "{{ oferta }}":<br/>
+<br/>
+<a href="{{ protocol }}{{ domain }}/oferta/?id={{ oferta.id }}">{{ protocol }}{{ domain }}/oferta/?id={{ oferta.id }}</a><br/>
+<br/>
+{% include "emails/signature.html" %}

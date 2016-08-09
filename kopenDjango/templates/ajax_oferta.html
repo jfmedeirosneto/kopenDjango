@@ -1,0 +1,68 @@
+{% load tags_produtos %}
+<div class="ui-grid-solo">
+    <div class="ui-block-a">
+        {% if oferta.active %}
+        {{ oferta.preco|format_currency }}<br/>
+        {% else %}
+        <span style="color: red;">* Oferta Desativada</span><br/>
+        <span style="color: red;"><del>{{ oferta.preco|format_currency }}</del></span><br/>
+        {% endif %}
+        {{ oferta.produto.nome }}
+    </div>
+</div>
+<div class="ui-grid-a" style="width: 200px; margin: auto; padding: 20px 5px 10px 5px;">
+	<div class="ui-block-a" id="id_div_like" liked="{{ liked }}" style="position: relative;">
+		<a style="width: 40px; padding-left: 15px;" id="id_botao_like" href="{{ protocol }}{{ domain }}/oferta_like/?id={{ oferta.id }}&csrfmiddlewaretoken={{ csrf_token }}" rel="nofollow" cookie="__OpinouOferta__{{ oferta.id }}" data-role="button" data-icon="thumbs_up" data-iconpos="notext" data-inline="true" data-mini="true" title="Gostei"></a>
+	</div>
+	<div class="ui-block-b" id="id_div_dislike" disliked="{{ disliked }}" style="position: relative;">
+		<a style="width: 40px; padding-left: 15px;" id="id_botao_dislike" href="{{ protocol }}{{ domain }}/oferta_dislike/?id={{ oferta.id }}&csrfmiddlewaretoken={{ csrf_token }}" rel="nofollow" cookie="__OpinouOferta__{{ oferta.id }}" data-role="button" data-icon="thumbs_down" data-iconpos="notext" data-inline="true" data-mini="true" title="Não Gostei"></a>
+	</div>
+</div>	
+<div class="ui-grid-b">
+	<div class="ui-block-a" style="width: 15%; text-align: left;">
+		{% if previous_id %}<a style="height: 40px; padding-top: 15px;" id="id_botao_previous" href="#" rel="nofollow" oferta="#id_link_oferta_{{ previous_id }}" data-role="button" data-mini="true" data-icon="arrow-l" data-iconpos="notext" title="Oferta Anterior">Oferta Anterior</a>{% endif %}			
+	</div>
+	<div class="ui-block-b" style="width: 70%; text-align: center;">
+		<a id="id_link_local_oferta" href="http://www.google.com/search?q={{ oferta.local.nome|urlify }}+{{ oferta.cidade.nome|urlify }}" rel="nofollow" callback="{{ protocol }}{{ domain }}/local_searched/?id={{ oferta.local.id }}&csrfmiddlewaretoken={{ csrf_token }}" data-role="button" data-mini="true" title="Procurar Local {{ oferta.local }} {{ oferta.cidade }}">{{ oferta.local }}<br/>{{ oferta.cidade }}</a>
+	</div>
+	<div class="ui-block-c" style="width: 15%; text-align: right;">
+		{% if next_id %}<a style="height: 40px; padding-top: 15px;" id="id_botao_next" href="#" rel="nofollow" oferta="#id_link_oferta_{{ next_id }}" data-role="button" data-mini="true" data-icon="arrow-r" data-iconpos="notext" title="Próxima Oferta">Próxima Oferta</a>{% endif %}			
+	</div>
+</div>
+<div class="ui-grid-solo" style="padding: 10px 0px 0px 0px;">
+	<div class="ui-block-a">
+		<img width="{{ oferta.get_imagem_width }}" height="{{ oferta.get_imagem_height }}" alt="{{ oferta.produto.nome }}" src="{{ protocol }}{{ domain }}{{ oferta.get_imagem_url }}"/>
+	</div>
+</div>
+<div class="ui-grid-b" style="width: 200px; margin: auto;">	
+	<div class="ui-block-a" style="text-align: right;">
+		<a style="width: 40px; padding-left: 15px;" id="id_botao_facebook" target="_blank" href="http://www.facebook.com/sharer.php?u={{ protocol }}{{ domain }}/oferta/?id={{ oferta.id }}" rel="nofollow" callback="{{ protocol }}{{ domain }}/oferta_shared/?id={{ oferta.id }}&csrfmiddlewaretoken={{ csrf_token }}" data-role="button" data-icon="facebook" data-iconpos="notext" data-inline="true" data-mini="true" title="Compartilhar no Facebook"></a>
+	</div>
+	<div class="ui-block-b" style="text-align: left;">
+		<a style="width: 40px; padding-left: 15px;" id="id_botao_twitter" target="_blank" href="http://twitter.com/home?status=Gostei da oferta &quot;{{ oferta.produto.nome }}&quot; - {{ protocol }}{{ domain }}/oferta/?id={{ oferta.id }}" rel="nofollow" callback="{{ protocol }}{{ domain }}/oferta_shared/?id={{ oferta.id }}&csrfmiddlewaretoken={{ csrf_token }}" data-role="button" data-icon="twitter" data-iconpos="notext" data-inline="true" data-mini="true" title="Compartilhar no Twitter"></a>
+	</div>
+	<div class="ui-block-c" style="text-align: left;">
+		<a style="width: 40px; padding-left: 15px;" id="id_botao_google_plus" target="_blank" href="https://plus.google.com/share?url={{ protocol }}{{ domain }}/oferta/?id={{ oferta.id }}" rel="nofollow" callback="{{ protocol }}{{ domain }}/oferta_shared/?id={{ oferta.id }}&csrfmiddlewaretoken={{ csrf_token }}" data-role="button" data-icon="google_plus" data-iconpos="notext" data-inline="true" data-mini="true" title="Compartilhar no Google+"></a>
+	</div>	
+</div>
+<div class="ui-grid-solo">
+    <div class="ui-block-a">
+        <a id="id_botao_go_home" href="{{ protocol }}{{ domain }}/?busca={{ oferta.produto.nome|urlify }}" data-role="button" data-mini="true" data-inline="true" rel="external" data-ajax="false" data-theme="e" title="Outras Ofertas {{ oferta.produto.nome }}">Outras Ofertas<br/>{{ oferta.produto.nome }}</a>
+    </div>
+</div>
+<div class="ui-grid-solo">
+    <div class="ui-block-a">
+	   <a id="id_botao_report" href="{{ protocol }}{{ domain }}/dialog_report_oferta/?id={{ oferta.id }}" rel="nofollow" data-role="button" data-icon="report" data-iconpos="left" data-inline="true" data-mini="true" data-rel="dialog" title="Informar Erro">Informar Erro</a>
+    </div>
+</div>
+<div class="ui-grid-solo" style="padding: 10px 0px 0px 0px;">
+    <div class="ui-block-a">
+        Adicionada {{ oferta.created|date:"d/m/Y" }}
+        {% if oferta.promoted %}
+        <br/><span style="color: red;">* Oferta de Anunciante</span>
+        {% endif %}
+        {% if oferta.new %}
+        <br/><span style="color: red;">* Oferta Nova</span>
+        {% endif %}
+    </div>
+</div>

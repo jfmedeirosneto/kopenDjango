@@ -1,0 +1,191 @@
+/**
+* kopenDjango Social network to share sales promotions
+* https://github.com/jfmedeirosneto/kopendjango
+* Copyright(c) 2016 João Neto <jfmedeirosneto@yahoo.com.br>
+*/
+
+/* Formatacao Geral */
+html {
+	overflow: -moz-scrollbars-vertical;
+	overflow: scroll;
+}
+
+/* Campo de erro */
+.form_error {
+	color: red;
+	font-weight: bold;
+	font-size: 14px;	
+}
+
+/* Home Header */
+#id_home_header {
+  text-align: center;
+  border-bottom-width: 3px;
+}
+#id_botao_menu {
+	margin-top: 3px;
+}
+#id_image_header {
+	margin: 5px 0px 2px 35px;
+}
+
+/* Formatacao Conteudo Home */
+#id_group_busca {
+	margin-top: 5px;
+	padding: 5px;
+	background-color: #fadb4e;
+}
+
+/* Formatacao Formulario Pesquisa */
+#id_busca {
+	text-align: center;
+	font-size: 15px;
+	padding: 10px 0px 10px 0px;	
+}
+#id_group_ordenar {
+    text-align: center;
+    margin-top: 5px;
+}
+#id_group_ordenar fieldset {
+    display: inline;
+}
+#id_group_ordenar .ui-btn-text {
+	font-size: 12px;	
+}
+
+/* Mensagem formulario de contato */
+#id_mensagem {
+	height: 100px;
+}
+
+/* Botao voltar para pagina principal */
+#id_botao_go_home {
+width: 200px;	
+}
+
+/* Botao link do local da oferta e botao voltar para pagina principal */
+#id_link_local_oferta .ui-btn-text, #id_botao_go_home .ui-btn-text {
+	white-space:normal!important;
+}
+
+/* Badger */
+.badger-outter {
+	background:#fff;
+	border:1px solid #ccc;
+	min-width: 36px;
+	height: 36px;
+	border-radius: 18px;
+	-moz-border-radius: 18px;
+	-webkit-border-radius: 18px;
+    text-shadow: none;
+    box-shadow: none;
+	float:left;
+	position:absolute;
+	top: -14px;
+	right: -4px;
+	z-index:999997;
+}
+.badger-inner {
+	min-width: 30px;
+	height: 30px;
+	border-radius: 15px;
+	-moz-border-radius: 15px;
+	-webkit-border-radius: 15px;
+	background: #f13c31;
+    margin:3px;
+    z-index:999998;
+}
+.badger-badge {
+	color:#fff;
+	padding:2px 5px;
+	margin:0;
+	text-align:center;
+    text-shadow: none;
+    box-shadow: none;
+	z-index:999999;
+}
+.badger-text { 
+	font-size:18px;
+}
+.badger-number{
+	font-size:22px;
+}
+
+/* Icons Personalizados */
+.ui-icon-vertical_more {
+	background-image: url("glyphicons_vertical_more.png");
+	border-radius: 0px;
+	background-color: #ffffff;
+}
+.ui-icon-thumbs_up {
+	background-image: url("glyphicons_thumbs_up.png");
+	border-radius: 0px;
+	background-color: #ffffff;
+	margin-left: 5px;
+}
+.ui-icon-thumbs_down {
+	background-image: url("glyphicons_thumbs_down.png");
+	border-radius: 0px;
+	background-color: #ffffff;
+	margin-left: 5px;	
+}
+.ui-icon-facebook {
+	background-image: url("glyphicons_facebook.png");
+	border-radius: 0px;
+	background-color: #ffffff;
+	margin-left: 5px;
+}
+.ui-icon-twitter {
+	background-image: url("glyphicons_twitter.png");
+	border-radius: 0px;
+	background-color: #ffffff;
+	margin-left: 5px;
+}
+.ui-icon-google_plus {
+	background-image: url("glyphicons_google_plus.png");
+	border-radius: 0px;
+	background-color: #ffffff;
+	margin-left: 5px;
+}
+.ui-icon-report {
+	background-image: url("glyphicons_report.png");
+	border-radius: 0px;
+	background-color: #ffffff;
+	margin-left: 5px;
+}
+
+/* Suggest Box */
+.suggestionsBox {
+	position: absolute;
+	z-index:99999;
+	width: 300px;	
+	left: 50%;
+	margin: 0px 0px 10px -150px;
+	background-color: #212427;
+	color: #fff;
+	-webkit-border-radius: .6em;
+	border-radius: .6em;
+	border-style: solid;
+	border-width: 1px;
+	border-color: white;	
+	font-size: 14px;
+}
+.suggestionList {
+	margin: 0px;
+	padding: 14px 0px 0px 0px;
+	list-style-type: none;	
+}
+.suggestionList li {
+	margin: 0px;
+	padding: 7px;
+	cursor: pointer;
+}
+.suggestionsBox img {
+	position: relative;
+	margin-left:auto;
+	margin-right:auto;
+	top: 13px;
+}
+.suggestionList li:hover {
+	background-color: #659CD8;
+}

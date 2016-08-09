@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block body_content %}
+<!-- Dialog Facebook Authorize -->
+<div id="id_dialog_facebook_authorize" data-role="dialog" data-close-btn="none" data-overlay-theme="a" style="text-align: center;">
+	<div data-role="header" data-theme="c"><h1>Facebook</h1></div>
+	<!-- Container para conteudo dinamico -->
+	<div data-role="content" data-theme="c">
+		{% if message %}<p>{{ message }}</p>{% endif %}
+    </div>
+</div>
+{% if redirect %}<script type="text/javascript">
+setTimeout(function() {
+	window.location.href = "{{ redirect }}";
+}, 2000);	
+</script>{% endif %}
+{% endblock %}

@@ -1,0 +1,23 @@
+"""
+kopenDjango Social network to share sales promotions
+https://github.com/jfmedeirosneto/kopendjango
+Copyright(c) 2016 João Neto <jfmedeirosneto@yahoo.com.br>
+"""
+
+Install Python 2.7.12
+
+Install Django 1.5
+
+	easy_install.exe django==1.5
+
+Install PIL
+
+	easy_install.exe pillow
+
+Sync database
+
+	python2.7 manage.py syncdb
+
+Run server
+
+	python2.7 manage.py runserver

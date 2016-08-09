@@ -1,0 +1,13 @@
+Prezado {{ receiver }},<br/>
+<br/>
+Erro da oferta reportado no site {{ site_name }}<br/>
+<br/>
+Link do erro da oferta "{{ erro_oferta }}":<br/>
+<br/>
+<a href="{{ protocol }}{{ domain }}/admin/produto/errooferta/{{ erro_oferta.id }}/">{{ protocol }}{{ domain }}/admin/produto/errooferta/{{ erro_oferta.id }}/</a><br/>
+<br/>
+Link da oferta "{{ oferta }}":<br/>
+<br/>
+<a href="{{ protocol }}{{ domain }}/admin/produto/oferta/{{ oferta.id }}/">{{ protocol }}{{ domain }}/admin/produto/oferta/{{ oferta.id }}/</a><br/>
+<br/>
+{% include "emails/signature.html" %}

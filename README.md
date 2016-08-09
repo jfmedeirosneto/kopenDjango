@@ -25,7 +25,7 @@ Copyright(c) 2016 João Neto <<jfmedeirosneto@yahoo.com.br>>
 
 ## Utilização kopenDjango
 
-A aplicação kopenDjango foi utilizado no site ofertasQui.com.br para divulgar ofertas das cidades de Jaraguá do Sul e Guaramirim
+A aplicação kopenDjango foi utilizado no site ofertasQui.com.br em 2013 para divulgar ofertas das cidades de Jaraguá do Sul e Guaramirim
 
 Hoje o site ofertasQui.com.br encontra-se desativado
 
@@ -72,13 +72,13 @@ easy_install.exe pillow
 Sincronizar base de dados
 
 ``` bash
-python2.7 manage.py syncdb
+python manage.py syncdb
 ```
 
 Executar servidor
 
 ``` bash
-python2.7 manage.py runserver
+python manage.py runserver
 ```
 
 Abrir o navegador web no endereço http://127.0.0.1:8000
